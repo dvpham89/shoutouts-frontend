@@ -1,0 +1,47 @@
+.Header {
+  height: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.Header .gc-so {
+  height: 140px;
+}
+
+.Header a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
+.Header a:hover {
+  cursor: pointer;
+  color: lightcoral;
+}
+
+.Header button {
+  padding: 5px;
+}
+
+.Header .sign-out {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Header .sign-out img {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}
+
+.Header .sign-out button {
+  width: 75px;
+  margin: 10px 5px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}

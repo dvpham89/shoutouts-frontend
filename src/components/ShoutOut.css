@@ -1,0 +1,55 @@
+.ShoutOut {
+  list-style: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: white;
+  color: black;
+}
+
+.ShoutOut .to-container {
+  font-size: large;
+  font-weight: bold;
+}
+
+.ShoutOut a {
+  text-decoration: none;
+  color: lightcoral;
+}
+
+.ShoutOut a:hover {
+  cursor: pointer;
+  color: orangered;
+}
+
+.ShoutOut .from-container {
+  font-size: small;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.ShoutOut .from-container p {
+  margin: 0 3px;
+}
+
+.ShoutOut .from-img {
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+}
+
+.ShoutOut .so-img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}
+
+.ShoutOut .votes-container {
+  display: flex;
+  align-items: center;
+}
+
+.ShoutOut .votes-container button {
+  margin: 10px;
+}

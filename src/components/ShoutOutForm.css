@@ -1,0 +1,32 @@
+.ShoutOutForm {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  color: black;
+}
+
+.ShoutOutForm h2,
+#to,
+#from,
+#msg {
+  margin-bottom: 10px;
+}
+
+.ShoutOutForm #to,
+#from {
+  width: 250px;
+}
+
+.ShoutOutForm #msg {
+  height: 75px;
+}
+
+.ShoutOutForm button {
+  width: 250px;
+  margin: 10px 0;
+}

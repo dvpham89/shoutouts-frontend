@@ -1,0 +1,11 @@
+.Main {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  background-color: lightcoral;
+}
+
+.Main h2 {
+  color: white;
+  font-size: 32px;
+}
