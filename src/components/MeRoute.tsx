@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import ShoutOut, { User } from "../models/ShoutOut";
 import {
+  downvoteShoutOut,
   getAllShoutoutsToFromMe,
-  upvoteShoutout,
+  upvoteShoutOut,
 } from "../services/shoutOutService";
 import "./MeRoute.css";
 import ShoutOutListItem from "./ShoutOut";
@@ -25,7 +26,15 @@ const MeRoute = () => {
   }, [user, navigate]);
 
   const upvoteHandler = (user: User, id: string): void => {
-    upvoteShoutout(user, id).then(() => {
+    upvoteShoutOut(user, id).then(() => {
+      getAllShoutoutsToFromMe(user?.displayName || "Anonymous").then((res) =>
+        setMyShoutouts(res)
+      );
+    });
+  };
+
+  const downvoteHandler = (user: User, id: string): void => {
+    downvoteShoutOut(user, id).then(() => {
       getAllShoutoutsToFromMe(user?.displayName || "Anonymous").then((res) =>
         setMyShoutouts(res)
       );
@@ -42,6 +51,7 @@ const MeRoute = () => {
             shoutOut={item}
             deleteHandler={() => {}}
             upvoteHandler={upvoteHandler}
+            downvoteHandler={downvoteHandler}
           />
         ))}
       </ul>

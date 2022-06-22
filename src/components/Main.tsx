@@ -4,9 +4,10 @@ import { signInWithGoogle } from "../firebaseConfig";
 import ShoutOut, { User } from "../models/ShoutOut";
 import {
   deleteShoutOut,
+  downvoteShoutOut,
   getAllShoutOuts,
   postNewShoutOut,
-  upvoteShoutout,
+  upvoteShoutOut,
 } from "../services/shoutOutService";
 import "./Main.css";
 import ShoutOutComponent from "./ShoutOut";
@@ -36,7 +37,13 @@ const Main = () => {
   };
 
   const upvoteHandler = (user: User, id: string): void => {
-    upvoteShoutout(user, id).then(() => {
+    upvoteShoutOut(user, id).then(() => {
+      getAllShoutOuts().then((res) => setShoutOuts(res));
+    });
+  };
+
+  const downvoteHandler = (user: User, id: string): void => {
+    downvoteShoutOut(user, id).then(() => {
       getAllShoutOuts().then((res) => setShoutOuts(res));
     });
   };
@@ -52,6 +59,7 @@ const Main = () => {
             shoutOut={item}
             deleteHandler={deleteHandler}
             upvoteHandler={upvoteHandler}
+            downvoteHandler={downvoteHandler}
           />
         ))}
       </ul>

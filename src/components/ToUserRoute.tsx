@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   deleteShoutOut,
+  downvoteShoutOut,
   getAllShoutOutsToUser,
   postNewShoutOut,
-  upvoteShoutout,
+  upvoteShoutOut,
 } from "../services/shoutOutService";
 import "./ToUserRoute.css";
 import ShoutOutListItem from "./ShoutOut";
@@ -40,7 +41,15 @@ const ToUserRoute = () => {
   };
 
   const upvoteHandler = (user: User, id: string): void => {
-    upvoteShoutout(user, id).then(() => {
+    upvoteShoutOut(user, id).then(() => {
+      getAllShoutOutsToUser(to).then((res) => {
+        setUsersShoutOuts(res);
+      });
+    });
+  };
+
+  const downvoteHandler = (user: User, id: string): void => {
+    downvoteShoutOut(user, id).then(() => {
       getAllShoutOutsToUser(to).then((res) => {
         setUsersShoutOuts(res);
       });
@@ -57,6 +66,7 @@ const ToUserRoute = () => {
             shoutOut={item}
             deleteHandler={deleteHandler}
             upvoteHandler={upvoteHandler}
+            downvoteHandler={downvoteHandler}
           />
         ))}
       </ul>

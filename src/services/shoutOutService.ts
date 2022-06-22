@@ -27,6 +27,10 @@ export const deleteShoutOut = (id: string): Promise<void> => {
   return axios.delete(`${baseUrl}/${id}`);
 };
 
-export const upvoteShoutout = (user: User, id: string): Promise<void> => {
+export const upvoteShoutOut = (user: User, id: string): Promise<void> => {
   return axios.put(`${baseUrl}/upvote/${id}`, user).then((res) => res.data);
+};
+
+export const downvoteShoutOut = (user: User, id: string): Promise<void> => {
+  return axios.put(`${baseUrl}/downvote/${id}`, user).then((res) => res.data);
 };

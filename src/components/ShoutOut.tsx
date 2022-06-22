@@ -2,16 +2,31 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import ShoutOutModel, { User } from "../models/ShoutOut";
+import ListOfLikes from "./ListofLikes";
 import "./ShoutOut.css";
 
 interface Props {
   shoutOut: ShoutOutModel;
   deleteHandler: (id: string) => void;
   upvoteHandler: (user: User, id: string) => void;
+  downvoteHandler: (user: User, id: string) => void;
 }
 
-const ShoutOut = ({ shoutOut, deleteHandler, upvoteHandler }: Props) => {
+const ShoutOut = ({
+  shoutOut,
+  deleteHandler,
+  upvoteHandler,
+  downvoteHandler,
+}: Props) => {
   const { user } = useContext(AuthContext);
+  const didUserLike = (): boolean => {
+    if (shoutOut.likes && user?.uid) {
+      return shoutOut.likes.some((so) => so.uid === user.uid);
+    } else {
+      return false;
+    }
+  };
+
   return (
     <li className="ShoutOut">
       <button
@@ -40,8 +55,39 @@ const ShoutOut = ({ shoutOut, deleteHandler, upvoteHandler }: Props) => {
       )}
       {user ? (
         <div className="votes-container">
-          <button>downvote</button>
-          <p>{shoutOut.likes ? shoutOut.likes.length : "0"} likes</p>
+          {didUserLike() ? (
+            <button
+              onClick={() =>
+                downvoteHandler(
+                  {
+                    displayName: user.displayName || "anonymous",
+                    uid: user.uid,
+                  },
+                  shoutOut._id!
+                )
+              }
+            >
+              downvote
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                upvoteHandler(
+                  {
+                    displayName: user.displayName || "anonymous",
+                    uid: user.uid,
+                  },
+                  shoutOut._id!
+                )
+              }
+            >
+              upvote
+            </button>
+          )}
+          <p className="likes-paragraph">
+            {shoutOut.likes ? shoutOut.likes.length : "0"} likes
+          </p>
+          <ListOfLikes likes={shoutOut.likes} />
           <button
             onClick={() =>
               upvoteHandler(
@@ -55,7 +101,10 @@ const ShoutOut = ({ shoutOut, deleteHandler, upvoteHandler }: Props) => {
         </div>
       ) : (
         <div>
-          <p>{shoutOut.likes ? shoutOut.likes.length : "0"} likes</p>
+          <p className="likes-paragraph">
+            {shoutOut.likes ? shoutOut.likes.length : "0"} likes
+          </p>
+          <ListOfLikes likes={shoutOut.likes} />
           <p>Please log in to upvote / downvote</p>
         </div>
       )}
